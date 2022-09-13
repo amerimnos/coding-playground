@@ -1,0 +1,24 @@
+let list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: {
+                value: 4,
+                next: null,
+            },
+        },
+    },
+};
+
+function printReverseList(list) {
+    debugger;
+    if (list.next) {
+        printReverseList(list.next);
+    }
+   
+    console.log(list.value);
+}
+
+printReverseList(list);
