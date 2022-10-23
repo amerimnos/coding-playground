@@ -9,51 +9,7 @@
 </head>
 
 <body>
-    <script>
-        function throttle(func, ms) {
-
-            let isThrottled = false,
-                savedArgs,
-                savedThis;
-
-            function wrapper() {
-
-                if (isThrottled) {
-                    savedArgs = arguments;
-                    savedThis = this;
-                    return;
-                }
-
-                func.apply(this, arguments);
-
-                isThrottled = true;
-
-                setTimeout(function () {
-                    isThrottled = false;
-                    if (savedArgs) {
-                        wrapper.apply(savedThis, savedArgs);
-                        savedArgs = savedThis = null;
-                    }
-                }, ms);
-            }
-
-            return wrapper;
-        }
-
-        function f(asb) {
-            alert(asb)
-        }
-
-        var tests = throttle(f, 1000);
-
-        tests('1a'); // 초기 무조건 발생
-        tests('1b'); // 아래 '1c' 값으로 저장되어 무시함.
-        tests('1c'); // 1초 후 발생
-        setTimeout(() => {tests('1d')}, 1100); // 위 함수 실행되고 100ms에 발생해서 일단 값 저장 후 1초 후 발생
-        setTimeout(() => {tests('1e')}, 2100); // 정확히 발생
-        setTimeout(() => {tests('1f')}, 3100); // 정확히 발생
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
