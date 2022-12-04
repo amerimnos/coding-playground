@@ -1,1 +1,3 @@
-console.log(1+1);
+deleteIosBounce();
+console.log('iNoBounce.isEnabled() : ', iNoBounce.isEnabled());
+console.log('iNoBounce.isScrollSupported : ', iNoBounce.isScrollSupported);
