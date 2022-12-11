@@ -8,7 +8,7 @@
     <title>Intersection Observer API</title>
     <script defer src="script.js"></script>
     <style>
-        #box {
+        .scroll-animate {
             margin: 2000px 0;
             background-color: rgb(184, 184, 184);
             border: 4px solid rgb(20, 20, 120);
@@ -22,13 +22,18 @@
             opacity: 0;
         }
 
-        #box.active {
-            animation: 2s ease-in 0s 1 normal forwards running test;
+        .box1,
+        .box2 {
+            margin: 200px 0;
+        }
+
+        .scroll-animate.active {
+            animation: 0.5s ease-in 0s 1 normal forwards running test;
         }
 
         @keyframes test {
             0% {
-                transform: translateY(200px);
+                transform: translateY(100%);
                 opacity: 0;
             }
 
@@ -55,30 +60,34 @@
 </head>
 
 <body>
-    <div id="box">
+    <div class="scroll-animate box1">
+        <div class="vertical">Welcome to <strong>The Box!</strong></div>
+    </div>
+    <div class="scroll-animate box2">
+        <div class="vertical">Welcome to <strong>The Box!</strong></div>
+    </div>
+    <div class="scroll-animate">
+        <div class="vertical">Welcome to <strong>The Box!</strong></div>
+    </div>
+    <div class="scroll-animate">
         <div class="vertical">Welcome to <strong>The Box!</strong></div>
     </div>
 
     <script>
         /* 
         IntersectionObserver web API를 활용하여 스크롤에 반응하여 밑에서 위로 올라오는 모션이 있을 때 어떻게 자연스럽게 처리 할 수 있을지에 대한 샘플.
+        여러 요소들까지 고려함.
         */
         const numSteps = 20.0;
+        let boxElements;
 
-        let boxElement;
-        let prevRatio = 0.0;
-        let isActive = false;
-
-        // Set things up
         window.addEventListener("load", (event) => {
-            boxElement = document.querySelector("#box");
+            boxElements = document.querySelectorAll(".scroll-animate");
             createObserver();
         });
 
-
         function createObserver() {
             let observer;
-
             let options = {
                 root: null,
                 rootMargin: "0px",
@@ -86,33 +95,21 @@
             };
 
             observer = new IntersectionObserver(handleIntersect, options);
-            observer.observe(boxElement);
+            boxElements.forEach((element, index) => {
+                observer.observe(element);
+            });
         }
 
         function handleIntersect(entries) {
             entries.forEach((entry) => {
-
-                if (entry.intersectionRatio > 0) {
-                    isActive = true;
-                    entry.target.classList.add('active');
-                }
-
-                if (isActive === true) {
-                    setTimeout(() => {
-                        isActive = false;
-                        if (prevRatio === 0) entry.target.classList.remove('active');
-                    }, 2100);
-                } else {
-                    if (entry.intersectionRatio === 0) entry.target.classList.remove('active');
-                }
-                prevRatio = entry.intersectionRatio;
+                if (entry.boundingClientRect.height === entry.intersectionRect.height) entry.target.classList.add('active');
+                if (entry.intersectionRatio === 0) entry.target.classList.remove('active');
             });
         }
 
-
         function buildThresholdList() {
             let thresholds = [];
-            let numSteps = 20;
+            let numSteps = 100;
 
             for (let i = 1.0; i <= numSteps; i++) {
                 let ratio = i / numSteps;
@@ -122,8 +119,6 @@
             thresholds.push(0);
             return thresholds;
         }
-
-
     </script>
 </body>
 
