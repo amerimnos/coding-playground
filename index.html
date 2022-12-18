@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>document</title>
+    <title>이미지가 아닌 요소를 이미지처럼 viewport에 따라 확대/축소 할 수 있게 하기</title>
     <style>
         * {
             margin: 0;
@@ -14,15 +14,25 @@
         }
 
         .box-wrap {
-            background: #000;
-            width: 100%;
-            height: 400vh;
+            position: relative;
+            height: 200vh;
         }
 
         .box {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: calc(333vw * 100 / (1000 + var(--user-scroll-bar-width)));
+            /* height: calc(1000vw * 100 / (1920 + var(--user-scroll-bar-width))); */
+            height: 51.58vw;
             background: skyblue;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
         }
     </style>
 </head>
@@ -30,8 +40,8 @@
 <body>
     <div class="box-wrap">
         <div class="box"></div>
+        <img src="img/layout_test.jpg" alt="">
     </div>
-
     <script>
         document.documentElement.style.setProperty("--user-scroll-bar-width", getScrollbarWidth());
 
