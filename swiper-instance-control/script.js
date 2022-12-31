@@ -3,46 +3,12 @@ let TEST = {
     instanceOfSwiper: null,
 }
 
-/* var test1 = new Swiper(".mySwiper", {
-    width: 198,
-    spaceBetween: 6,
-    touchReleaseOnEdges: true,
-    loopedSlidesLimit: false,
-
-    on: {
-        beforeInit: function () {
-            const numOfSlides = this.el.querySelectorAll('.swiper-slide').length,
-                numOfslidesToCopy = numOfSlides + 1,
-                SumOfMarginsOnBothSidesOfSwiper = 40,
-                widthOfSlide = this.params.width - SumOfMarginsOnBothSidesOfSwiper;
-
-            TEST.numOfSlidesToZeroDay = numOfSlides;
-
-            if (numOfSlides * (widthOfSlide + this.params.spaceBetween) <= window.innerWidth - SumOfMarginsOnBothSidesOfSwiper) {
-                this.disable();
-            } else {
-                this.params.loop = true;
-                this.params.loopAdditionalSlides = numOfslidesToCopy;
-            }
-        },
-        resize: function () {
-            window.addEventListener('orientationchange', () => {
-                console.log('orientationchange...origin');
-                setTimeout(() => {
-                    test1.destroy();
-                    controlZeroDaySwiper();
-                }, 30);
-            }, { once: true });
-        },
-    },
-}); */
-
 controlZeroDaySwiper();
 
 window.addEventListener("orientationchange", function () {
     setTimeout(() => {
         TEST.instanceOfSwiper.destroy();
-        controlZeroDaySwiper(); 
+        controlZeroDaySwiper();
     }, 30);
 });
 
