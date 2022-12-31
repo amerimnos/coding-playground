@@ -1,53 +1,103 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pc에서 이미지가 아닌 요소를 이미지처럼 viewport에 따라 확대/축소 할 수 있게 하기</title>
+    <meta charset="utf-8" />
+    <title>Swiper demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
     <style>
         * {
+            background-color: rgba(182, 135, 135, 0.226);
+        }
+
+        body {
+            max-width: 720px;
+            background: #eee;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
-        .section01 {
-            position: relative;
-            top: 10vw;
-        }
-        
-        .section-layout {
-            width: 80%;
-            display: block;
+        .swiper {
+            height: 20%;
+            padding: 0 20px;
         }
 
-        .box {
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            width: 50%;
-            height: 50%;
-            background: #dff8c2;
-        }
-
-        h2 {
-            z-index: 10;
-            font-size: 5vw;
-            position: absolute;
-            top: 10%;
-            left: 19%;
+        .swiper-slide {
+            width: 158px;
+            height: 159px;
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 
 <body>
-    <section class="section01">
-        <img class="section-layout" src="img/layout_test.jpg" alt="">
-        <h2>Lorem ipsum dolor sit amet.</h2>
-        <div class="box"></div>
-    </section>
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+    </div>
+
+
+    <div class="test">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem at molestiae iste commodi aperiam
+        impedit nesciunt laborum fugit autem aut reiciendis deleniti in animi necessitatibus, eos facilis? Officia
+        praesentium provident iure excepturi adipisci, soluta a illum repellat, eligendi totam sequi ea aspernatur
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        deleniti quos delectus corrupti repudiandae sed itaque. Error perspiciatis soluta earum molestias eveniet est
+        impedit nesciunt laborum fugit autem aut reiciendis deleniti in animi necessitatibus, eos facilis? Officia
+        praesentium provident iure excepturi adipisci, soluta a illum repellat, eligendi totam sequi ea aspernatur
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        deleniti quos delectus corrupti repudiandae sed itaque. Error perspiciatis soluta earum molestias eveniet est
+        impedit nesciunt laborum fugit autem aut reiciendis deleniti in animi necessitatibus, eos facilis? Officia
+        praesentium provident iure excepturi adipisci, soluta a illum repellat, eligendi totam sequi ea aspernatur
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        deleniti quos delectus corrupti repudiandae sed itaque. Error perspiciatis soluta earum molestias eveniet est
+        impedit nesciunt laborum fugit autem aut reiciendis deleniti in animi necessitatibus, eos facilis? Officia
+        praesentium provident iure excepturi adipisci, soluta a illum repellat, eligendi totam sequi ea aspernatur
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        deleniti quos delectus corrupti repudiandae sed itaque. Error perspiciatis soluta earum molestias eveniet est
+        impedit nesciunt laborum fugit autem aut reiciendis deleniti in animi necessitatibus, eos facilis? Officia
+        praesentium provident iure excepturi adipisci, soluta a illum repellat, eligendi totam sequi ea aspernatur
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        deleniti quos delectus corrupti repudiandae sed itaque. Error perspiciatis soluta earum molestias eveniet est
+        impedit nesciunt laborum fugit autem aut reiciendis deleniti in animi necessitatibus, eos facilis? Officia
+        praesentium provident iure excepturi adipisci, soluta a illum repellat, eligendi totam sequi ea aspernatur
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        deleniti quos delectus corrupti repudiandae sed itaque. Error perspiciatis soluta earum molestias eveniet est
+        impedit nesciunt laborum fugit autem aut reiciendis deleniti in animi necessitatibus, eos facilis? Officia
+        praesentium provident iure excepturi adipisci, soluta a illum repellat, eligendi totam sequi ea aspernatur
+        officiis facere possimus? Quam laborum voluptates nostrum mollitia dolorum, vel eligendi sequi sit veritatis et
+        voluptas aliquam porro nesciunt, dolor voluptatem, obcaecati quos labore recusandae nam minus commodi! Alias
+        deleniti quos delectus corrupti repudiandae sed itaque. Error perspiciatis soluta earum molestias eveniet est
+        rem id magni ipsa explicabo, asperiores tempore? Delectus ab quos praesentium perspiciatis rem earum tempora!
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script defer src="script.js"></script>
 </body>
 
 </html>
