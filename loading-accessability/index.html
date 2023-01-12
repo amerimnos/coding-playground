@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge; chrome=1">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+    <title>0한동</title>
+</head>
+
+<body>
+    <div id="document" class="c-pb-wrap body-scroll-lock">
+        <!-- c-main__wrap -->
+        <div class="c-main__wrap" style="top: 0px;">
+            <div class="temp-area"></div>
+        </div>
+        <!-- // c-main__wrap -->
+        <!-- Progress Indicator -->
+        <div class="l-spinner active">
+            <div id="spinner" class="spinner center">
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+                <div class="spinner-blade"></div>
+            </div>
+            <div id="loading-start" class="hidden" aria-live="assertive">로딩중</div>
+            <div id="loading-end" class="hidden" aria-live="assertive"></div>
+        </div>
+        <!-- // Progress Indicator -->
+        <div class="btn-wrap">
+            <button id="ShowBtn" class="test_btn">SHOW</button>
+            <button id="HideBtn" class="test_btn">HIDE</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ShowBtn').click(function () {
+                openLeadingIcon();
+            });
+            $('#HideBtn').click(function () {
+                closeLeadingIcon();
+            });
+        });
+
+        function openLeadingIcon() {
+            $('#loading-end').removeAttr('role').removeAttr('aria-busy').text('');
+            $('#loading-start').attr({ 'role': 'alert', 'aria-busy': 'true' }).text('로딩중');
+        }
+
+        function closeLeadingIcon() {
+            $('#loading-start').removeAttr('role').attr('aria-busy', 'false').text('');
+            $('#loading-end').attr({ 'role': 'alert' }).text('로딩 완료');
+        }
+
+
+        setTimeout(() => {
+
+            $('#loading-end').removeAttr('role').removeAttr('aria-busy').text('');
+            $('#loading-start').attr({ 'role': 'alert', 'aria-busy': 'true' }).text('로딩중');
+        }, 8000);
+
+
+        setTimeout(() => {
+
+            $('#loading-start').removeAttr('role').attr('aria-busy', 'false').text('');
+            $('#loading-end').attr({ 'role': 'alert' }).text('로딩 완료');
+        }, 12000);
+
+    </script>
+
+</body>
+
+</html>
