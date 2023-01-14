@@ -4,11 +4,11 @@ window.addEventListener("scroll", () => {
 
 /**
  * @description scroll에 따른 class 추가
- * @param target string : 예시) .box or #box
- * @param NameOfCustomCSS string
- * @param ValueOfTransY number
+ * @param {string} target - 해당 요소 예시) '.box' or '#box'
+ * @param {string} CSSCustomProp
+ * @param {number} translateY
  */
-function activeAnimationTransY(target, NameOfCustomCSS, ValueOfTransY) {
+function activeAnimationTransY(target, CSSCustomProp, translateY) {
     var _scheduledAnimationFrame = false;
     var _boxElements = document.querySelectorAll(target);
 
@@ -20,8 +20,8 @@ function activeAnimationTransY(target, NameOfCustomCSS, ValueOfTransY) {
 
             if (getElemOfViewportHeightRatio(el) < 0 || getElemOfViewportHeightRatio(el) > 1) return;
 
-            if (el.getBoundingClientRect().bottom > ValueOfTransY && el.getBoundingClientRect().top < window.innerHeight - ValueOfTransY) {
-                document.documentElement.style.setProperty(NameOfCustomCSS, ValueOfTransY + 'px');
+            if (el.getBoundingClientRect().bottom > translateY && el.getBoundingClientRect().top < window.innerHeight - translateY) {
+                document.documentElement.style.setProperty(CSSCustomProp, translateY + 'px');
                 el.classList.add('active')
             }
 
