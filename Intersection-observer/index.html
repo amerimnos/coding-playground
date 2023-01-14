@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>getBoundingClientRect와 Intersection Observer API를 활용한 scroll 모션 제어</title>
     <style>
         body {
             height: 15000px;
@@ -15,21 +15,23 @@
             position: relative;
             display: flex;
             justify-content: center;
-            width: 400px;
+            width: 100%;
             background-color: blue;
         }
 
-        .box1{
+        .box1 {
             position: relative;
             top: 1700px;
             height: 400px;
         }
-        .box1::before{
+
+        .box1::before {
             content: '';
         }
-        .box2{
+
+        .box2 {
             top: 3400px;
-            height: 19px;
+            height: 200px;
         }
 
         .margin-line-top {
@@ -41,6 +43,7 @@
             margin: 0;
             background-color: red;
         }
+
         .margin-line-bottom {
             display: none;
             position: relative;
@@ -54,10 +57,12 @@
         .animation {
             animation: test 1s linear 0s;
         }
+
         @keyframes test {
             0% {
                 transform: translateY(100px);
             }
+
             100% {
                 transform: translateY(0px);
             }
@@ -66,7 +71,8 @@
 </head>
 
 <body>
-    <hr class="margin-line-top"></hr>
+    <hr class="margin-line-top">
+    </hr>
     <div class="box box1">
         <div class="vertical">
             Welcome to <strong>The Box!</strong>
@@ -77,7 +83,8 @@
             Welcome to <strong>The Box!</strong>
         </div>
     </div>
-    <hr class="margin-line-bottom"></div>
+    <hr class="margin-line-bottom">
+    </div>
     <script src="script.js"></script>
 </body>
 

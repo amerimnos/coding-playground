@@ -1,27 +1,40 @@
 
 const numSteps = 20.0;
-
 let boxElements;
 
-// Set things up
-window.addEventListener("load", (event) => {
+
+window.addEventListener("load", () => {
     boxElements = document.querySelectorAll(".box");
     createObserver();
 }, false);
 
 
+window.addEventListener("scroll", () => {
+    activeAnimationTransY();
+})
 
 /**
- * 높이값이 작고 트렌지션Y 모션이 클 경우만 활용
+ * 해당 요소 어느 위치에서 활성화 할지 상정
+ * rAF 활용하여 비동기 수행 - 랜더링 관련 성능 최적화
  */
-function transYactive(params) {
-    /* 뷰퍼트 하이 - 해당 요소 높이 절대값 < 100 이면
-    active 추가 */
+function activeAnimationTransY() {
+    var scheduledAnimationFrame = false;
+    if (scheduledAnimationFrame) return;
+
+    scheduledAnimationFrame = true;
+    requestAnimationFrame(function () {
+        boxElements.forEach(function (el) {
+            if (el.getBoundingClientRect().y < window.innerHeight - 100 && el.getBoundingClientRect().y > 100) {
+                el.classList.add('active')
+            }
+        })
+        scheduledAnimationFrame = false;
+    })
 }
 
-
 /**
- * 해당 요소 없을 때만 활용
+ * 해당 요소 안보일 때만 API 활용 - 비동기로 메인쓰레드 부화 감소 목적
+ * 해당 요소가 전부 보이고 더 안 쪽으로 들어 왔을때 콜백함수가 실행 안되는 제약 때문
  */
 function createObserver() {
     boxElements.forEach(function (el) {
@@ -32,20 +45,12 @@ function createObserver() {
             threshold: buildThresholdList()
         };
 
-        //if (el.getBoundingClientRect().height < 100) options.rootMargin = "-100px"
         observer = new IntersectionObserver(handleIntersect, options);
         observer.observe(el);
 
         function handleIntersect(entries, observer) {
-            
-            entries.forEach((entry) => {
-                console.log('entry.rootBounds :' + observer.rootMargin);
-                console.log('entry.intersectionRatio :' + entry.intersectionRatio);
-                console.log('entry.intersectionRect.height :' + entry.intersectionRect.height + ' entry.boundingClientRect.height  :' + entry.boundingClientRect.height);
 
-/*                 if (entry.intersectionRect.height === entry.boundingClientRect.height) {
-                    entry.target.classList.add('active');
-                } */
+            entries.forEach((entry) => {
                 if (entry.intersectionRatio === 0) {
                     entry.target.classList.remove('active');
                 }
