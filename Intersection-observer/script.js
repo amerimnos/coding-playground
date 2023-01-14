@@ -1,31 +1,32 @@
-
-const numSteps = 20.0;
-let boxElements;
-
-
-window.addEventListener("load", () => {
-    boxElements = document.querySelectorAll(".box");
-    createObserver();
-}, false);
-
-
 window.addEventListener("scroll", () => {
-    activeAnimationTransY();
+    activeAnimationTransY('.box', '--user-scroll-animation-translateY', 100);
 })
 
 /**
- * 해당 요소 어느 위치에서 활성화 할지 상정
- * rAF 활용하여 비동기 수행 - 랜더링 관련 성능 최적화
+ * @param target string : 예시) .box or #box
+ * @param NameOfCustomCSS string
+ * @param ValueOfTransY number
  */
-function activeAnimationTransY() {
+
+function activeAnimationTransY(target, NameOfCustomCSS, ValueOfTransY) {
     var scheduledAnimationFrame = false;
+    var boxElements = document.querySelectorAll(target);
+
     if (scheduledAnimationFrame) return;
 
     scheduledAnimationFrame = true;
     requestAnimationFrame(function () {
         boxElements.forEach(function (el) {
-            if (el.getBoundingClientRect().y < window.innerHeight - 100 && el.getBoundingClientRect().y > 100) {
+
+            if (getElemOfViewportHeightRatio(el) < 0 || getElemOfViewportHeightRatio(el) > 1) return;
+
+            if (el.getBoundingClientRect().bottom > ValueOfTransY && el.getBoundingClientRect().top < window.innerHeight - ValueOfTransY) {
+                document.documentElement.style.setProperty(NameOfCustomCSS, ValueOfTransY + 'px');
                 el.classList.add('active')
+            }
+
+            if (getElemOfViewportHeightRatio(el) === 0 || getElemOfViewportHeightRatio(el) === 1) {
+                el.classList.remove('active')
             }
         })
         scheduledAnimationFrame = false;
@@ -33,42 +34,18 @@ function activeAnimationTransY() {
 }
 
 /**
- * 해당 요소 안보일 때만 API 활용 - 비동기로 메인쓰레드 부화 감소 목적
- * 해당 요소가 전부 보이고 더 안 쪽으로 들어 왔을때 콜백함수가 실행 안되는 제약 때문
+ * 해당 요소의 viewport height의 위치 비율.
  */
-function createObserver() {
-    boxElements.forEach(function (el) {
-        let observer;
-        let options = {
-            root: null,
-            rootMargin: "0px",
-            threshold: buildThresholdList()
-        };
+function getElemOfViewportHeightRatio(el) {
+    var _ratio = 0;
 
-        observer = new IntersectionObserver(handleIntersect, options);
-        observer.observe(el);
+    //if(el.getBoundingClientRect().top > window.innerHeight || el.getBoundingClientRect().bottom < 0) return _ratio;
 
-        function handleIntersect(entries, observer) {
+    if (_ratio >= 0 && _ratio <= 1) {
+        _ratio = el.getBoundingClientRect().bottom / (window.innerHeight + el.getBoundingClientRect().height)
+    }
+    if (_ratio < 0) _ratio = 0;
+    if (_ratio > 1) _ratio = 1;
 
-            entries.forEach((entry) => {
-                if (entry.intersectionRatio === 0) {
-                    entry.target.classList.remove('active');
-                }
-            });
-        }
-
-        function buildThresholdList() {
-            let thresholds = [];
-            let numSteps = 20;
-
-            for (let i = 1.0; i <= numSteps; i++) {
-                let ratio = i / numSteps;
-                thresholds.push(ratio);
-            }
-
-            thresholds.push(0);
-            return thresholds;
-        }
-
-    });
+    return _ratio;
 }

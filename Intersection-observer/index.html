@@ -6,73 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>getBoundingClientRect와 Intersection Observer API를 활용한 scroll 모션 제어</title>
-    <style>
-        body {
-            height: 15000px;
-        }
-
-        .box {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            background-color: blue;
-        }
-
-        .box1 {
-            position: relative;
-            top: 1700px;
-            height: 400px;
-        }
-
-        .box1::before {
-            content: '';
-        }
-
-        .box2 {
-            top: 3400px;
-            height: 200px;
-        }
-
-        .margin-line-top {
-            display: none;
-            position: relative;
-            top: 1600px;
-            width: 100%;
-            height: 1px;
-            margin: 0;
-            background-color: red;
-        }
-
-        .margin-line-bottom {
-            display: none;
-            position: relative;
-            top: 1800px;
-            width: 100%;
-            height: 1px;
-            margin: 0;
-            background-color: red;
-        }
-
-        .animation {
-            animation: test 1s linear 0s;
-        }
-
-        @keyframes test {
-            0% {
-                transform: translateY(100px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <hr class="margin-line-top">
-    </hr>
     <div class="box box1">
         <div class="vertical">
             Welcome to <strong>The Box!</strong>
@@ -82,8 +19,6 @@
         <div class="vertical">
             Welcome to <strong>The Box!</strong>
         </div>
-    </div>
-    <hr class="margin-line-bottom">
     </div>
     <script src="script.js"></script>
 </body>

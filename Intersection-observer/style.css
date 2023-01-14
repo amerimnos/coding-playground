@@ -1,0 +1,45 @@
+html {
+    --user-scroll-animation-translateY: 0px;
+}
+
+body {
+    height: 15000px;
+}
+
+.box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: blue;
+    color: #fff;
+    font-size: 3em;
+    opacity: 0;
+}
+
+.box.active {
+    animation: scroll-animation 1s linear 0s forwards;
+}
+
+.box1 {
+    position: relative;
+    top: 1700px;
+    height: 400px;
+}
+
+.box2 {
+    top: 3400px;
+    height: 200px;
+}
+
+@keyframes scroll-animation {
+    0% {
+        transform: translateY(var(--user-scroll-animation-translateY));
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
