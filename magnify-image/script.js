@@ -11,31 +11,40 @@ function imageZoom(imgID, resultID) {
 
     img = document.getElementById(imgID);
     result = document.getElementById(resultID);
+
     lens = document.createElement("DIV");
     lens.setAttribute("class", "img-zoom-lens");
     img.parentElement.insertBefore(lens, img);
 
-    /*calculate the ratio between result DIV and lens:*/
-    cx = result.offsetWidth / lens.offsetWidth;
-    cy = result.offsetHeight / lens.offsetHeight;
-
-    result.style.backgroundImage = `url('${img.src}')`;
-    result.style.backgroundSize = `${(img.width * cx)}px ${(img.height * cy)}px`;
+    img.addEventListener("mousemove", moveLens);
+    img.addEventListener("touchstart", moveLens);
+    img.addEventListener("touchmove", moveLens);
+    lens.addEventListener("mousemove", moveLens);
+    lens.addEventListener("touchmove", moveLens);
+    window.addEventListener("orientationchange", (event) => {
+        console.log(`the orientation of the device is now ${event.target.screen.orientation.angle}`);
+        setTimeout(() => {
+            initPos();
+        }, 100);
+    });
 
     initialize();
 
     function initialize() {
-        img.addEventListener("mousemove", moveLens);
-        img.addEventListener("touchstart", moveLens);
-        img.addEventListener("touchmove", moveLens);
-
-        lens.addEventListener("mousemove", moveLens);
-        lens.addEventListener("touchmove", moveLens);
-
         initPos();
     }
 
     function initPos() {
+        lens.style.width = `${result.offsetWidth / 2}px`;
+        lens.style.height = `${result.offsetHeight / 2}px`;
+
+        /*calculate the ratio between result DIV and lens:*/
+        cx = result.offsetWidth / lens.offsetWidth;
+        cy = result.offsetHeight / lens.offsetHeight;
+
+        result.style.backgroundImage = `url('${img.src}')`;
+        result.style.backgroundSize = `${(img.width * cx)}px ${(img.height * cy)}px`;
+
         var x = img.width / 2 - lens.offsetWidth / 2;
         var y = img.height / 2 - lens.offsetHeight / 2;
 
