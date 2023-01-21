@@ -15,15 +15,13 @@ function controlImageUsingCanvasWhenScroll() {
     let height = 770;
     let numFrames = 147;
     let frameIndex = 0;
+    let countLoadImg = 0;
     isFirstImgLoading = false;
 
     preloadImages();
     renderCanvas();
     render();
     window.addEventListener("scroll", handleScroll);
-    window.addEventListener("load", () => {
-        cancelAnimationFrame(requestId);
-    });
 
     function getCurrentFrame(index) {
         return `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${index.toString().padStart(4, "0")}.jpg`;
@@ -34,10 +32,12 @@ function controlImageUsingCanvasWhenScroll() {
             const img = new Image();
             const imgSrc = getCurrentFrame(i);
             img.src = imgSrc;
-            images.push(img)
+            images.push(img);
+            img.addEventListener('load', function () {
+                countLoadImg++
+            });
         }
     }
-
     function handleScroll() {
         const scrollFraction = window.scrollY / (scrollHeight - window.innerHeight);
         const index = Math.min(
@@ -56,7 +56,7 @@ function controlImageUsingCanvasWhenScroll() {
             return;
         }
         context.drawImage(images[frameIndex], 0, 0);
-        console.log('repeat...')
+        if (countLoadImg === numFrames) cancelAnimationFrame(requestId);
         requestId = requestAnimationFrame(render);
     }
 
