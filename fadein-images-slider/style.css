@@ -31,8 +31,8 @@ h1 {
     overflow: hidden;
     position: relative;
     margin: 0 auto;
-    width: 50%;
-    padding-bottom: 70%;
+    width: clamp(1px, 39%, 640px);
+    padding-bottom: clamp(1px, 58%, 929px);
 }
 
 .img-wrap .pause {
