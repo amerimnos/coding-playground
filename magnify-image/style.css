@@ -3,6 +3,10 @@
     --user-zoom-lens-height: 210px;
 }
 
+html {
+    font-size: 10px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -17,15 +21,17 @@ h1 {
     margin: 70px auto 70px;
     padding: 0 20px;
     text-align: center;
-    font-size: 5vw;
+    font-size: max(1.5rem, min(3vw, 2.5rem));
     color: #266ea7;
 }
 
 .img-zoom-container {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     column-gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .imgid {
@@ -38,9 +44,6 @@ h1 {
     background: rgba(173, 173, 173, 0.308);
 }
 
-#myhide {
-}
-
 .img-zoom-result {
     border: 1px solid #d4d4d4;
     width: 100%;
@@ -49,6 +52,7 @@ h1 {
 
 #myimage {
     width: 100%;
+    max-width: 800px;
 }
 
 @media screen and (max-width: 750px) {

@@ -5,6 +5,7 @@ window.addEventListener("load", function () {
 function imageZoom(imgID, resultID) {
     var img = null,
         lens = null,
+        lensSizeRatio = 3,
         result = null,
         cx = 0,
         cy = 0;
@@ -25,7 +26,7 @@ function imageZoom(imgID, resultID) {
         console.log(`the orientation of the device is now ${event.target.screen.orientation.angle}`);
         setTimeout(() => {
             initPos();
-        }, 100);
+        }, 50);
     });
 
     initialize();
@@ -35,8 +36,8 @@ function imageZoom(imgID, resultID) {
     }
 
     function initPos() {
-        lens.style.width = `${result.offsetWidth / 2}px`;
-        lens.style.height = `${result.offsetHeight / 2}px`;
+        lens.style.width = `${result.offsetWidth / lensSizeRatio}px`;
+        lens.style.height = `${result.offsetHeight / lensSizeRatio}px`;
 
         /*calculate the ratio between result DIV and lens:*/
         cx = result.offsetWidth / lens.offsetWidth;
