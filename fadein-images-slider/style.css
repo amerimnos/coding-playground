@@ -1,0 +1,107 @@
+:root {
+    --user-zoom-lens-width: 100px;
+    --user-zoom-lens-height: 210px;
+}
+
+html {
+    font-size: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.document {
+    padding: 0 30px;
+}
+
+h1 {
+    margin: 70px auto 70px;
+    padding: 20px;
+    text-align: center;
+    font-size: max(1.5rem, min(3vw, 2.5rem));
+    color: #266ea7;
+    border-top: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+}
+
+.img-wrap {
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    width: 50%;
+    padding-bottom: 70%;
+}
+
+.img-wrap .pause {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 20;
+    background-color: #fff;
+    padding: 12px;
+}
+
+.img-wrap [type="checkbox"] {
+    display: none;
+}
+
+.img-wrap img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: scaleSlide linear 15s infinite;
+    transform: scale(1.15);
+}
+
+.img-wrap .img01 {
+    animation-delay: 0s;
+}
+
+.img-wrap .img02 {
+    animation-delay: 3s;
+}
+
+.img-wrap .img03 {
+    animation-delay: 6s;
+}
+
+.img-wrap .img04 {
+    animation-delay: 9s;
+}
+
+.img-wrap .img05 {
+    animation-delay: 12s;
+}
+
+.img-wrap #pause:checked~img {
+    animation-play-state: paused;
+}
+
+@keyframes scaleSlide {
+    0% {
+        z-index: 10;
+        transform: scale(1.15);
+    }
+
+    20% {
+        z-index: 10;
+        transform: scale(1);
+    }
+
+    21% {
+        z-index: 1;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .img-wrap {
+        width: 90%;
+        padding-bottom: 140%;
+    }
+}
