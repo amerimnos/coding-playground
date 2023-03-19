@@ -44,7 +44,6 @@ function parallax() {
         });
     }
 
-    window.addEventListener("scroll", scrollListener);
     window.addEventListener("load", scrollListener);
 }
 
