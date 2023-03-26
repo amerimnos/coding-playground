@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#document {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+
+.random-appear__wrap {
+    position: relative;
+    width: 80vw;
+}
+
+.grid-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 80vw;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(50, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.grid-item {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    opacity: 1;
+    transition: opacity .5s ease-in-out;
+}
+
+.random-appear__text {
+    font-size: 3vw;
+    text-align: center;
+    font-weight: bold;
+}
