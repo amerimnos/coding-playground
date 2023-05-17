@@ -11,7 +11,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#91d191;
+    background-color: #91d191;
 }
 
 
@@ -28,4 +28,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1vw;
+    margin-bottom: 4vw;
+}
+
+.flat-btn,
+.curv-btn {
+    padding: 5px 15px;
+}
+
+@media screen and (max-width: 750px) {
+    #document {
+        width: 90%;
+    }
 }

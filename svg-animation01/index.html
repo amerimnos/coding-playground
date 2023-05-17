@@ -12,18 +12,26 @@
 <body>
     <div id="document">
         <div class="btn-wrap">
-            <button id="btn">Click me</button>
+            <button data-mode="flat" class="flat-btn">평면 패널로 변신</button>
+            <button data-mode="curv" class="curv-btn">커브드 패널로 변신</button>
         </div>
-        <svg width="100%" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"
-            xmlns:svg="http://www.w3.org/2000/svg">
-            <g>
-                <title>svg 애니메이션</title>
-                <path d="m57,58c111,94 237,77 334,-14l1,98c-92.33333,96.33333 -235.66667,90.66667 -332,12l-3,-96z"
-                    fill="transparent" id="svg_4" stroke="#000000" stroke-width="4" transform="matrix(1 0 0 1 0 0)">
-                    <animate attributeName="d" begin="btn.click" dur="3" from="0" to="100" fill="freeze"
-                        values="M57,58 C168,152 294,135 391,44 L392,142 C299.66666666666663,238.33333333333331 156.33333333333334,232.66666666666669 60,154 L57,58 z;M 57.5 274.17674255371094 C 168.83333333333331 269.51007588704425 280.1666666666667 264.8434092203776 391.5 260.17674255371094 L 392.5 357.17674255371094 C 238.83333333333331 362.51007588704425 171.16666666666669 365.8434092203776 60.5 370.17674255371094 L 57.5 274.17674255371094 z" />
-                </path>
-            </g>
+        <svg class="svg" width="100%" viewBox="0 0 661 361" xmlns="http://www.w3.org/2000/svg">
+
+            <defs>
+                <linearGradient id="myGradient">
+                    <stop offset="0%" stop-color="pink" />
+                    <stop offset="100%" stop-color="black" />
+                </linearGradient>
+            </defs>
+
+            <title>버튼을 눌렀을 때 커브드와 평면 패널로 바뀌는 모션을 보여줍니다.</title>
+            <path d="M659.999 1C659.999 1 197 1.50018 0.998535 1V207C269.5 207.5 659.999 207 659.999 207V1Z"
+                fill="url(#myGradient)" fill-opacity="0.5" stroke="#000000" stroke-width="3">
+                <animate class="curv" attributeName="d" begin="indefinite" dur="0.5" fill="freeze"
+                    to="M659.999 1.99988C659.999 1.99988 346.501 347.502 0.998535 1.99988V208C343 550.001 659.999 208 659.999 208V1.99988Z" />
+                <animate class="flat" attributeName="d" begin="indefinite" dur="0.5" fill="freeze"
+                    to="M659.999 1C659.999 1 197 1.50018 0.998535 1V207C269.5 207.5 659.999 207 659.999 207V1Z" />
+            </path>
         </svg>
     </div>
     <script src="script.js"></script>
