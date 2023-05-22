@@ -1,4 +1,38 @@
-// 비동기 함수를 정의합니다.
+
+
+//============= 방법1
+let combinedObject = {}
+
+makeMultipleRequests();
+
+function makeRequest(url) {
+    return fetch(url).then(response => response.json());
+}
+
+function makeMultipleRequests() {
+    return makeRequest('data_object_length.php')
+        .then(response => {
+            console.log('response', response);
+            const requests = [];
+            for (let i = 0; i < response; i += 2) {
+                requests.push(makeRequest(`data.php?offset=${i}&limit=2`));
+            }
+            return Promise.all(requests);
+        }).then(responses => {
+            combinedObject = Object.assign({}, ...responses);
+            return responses;
+        }).then(response => {
+            console.log('response', response, 'typeof response', typeof response);
+        })
+}
+
+
+
+
+
+
+//============= 방법2 : 허접함
+/* // 비동기 함수를 정의합니다.
 async function fetchData(url) {
     const response = await fetch(url);
     const data = await response.json();
@@ -24,11 +58,10 @@ const urls = Array.from({ length: 100 }, () => {
 // 결과를 출력합니다.
 console.log(urls);
 
-/* const urls = [
+
+const DataLength = [
     'data_object_length.php'
 ]
- */
-
 
 const requests = urls.map(url => fetchData(url));
 Promise.all(requests)
@@ -39,33 +72,4 @@ Promise.all(requests)
     .catch(error => {
         // 에러 처리를 합니다.
         console.error(error);
-    });
-
-
-
-
-
-
-/* // XMLHttpRequest 객체를 생성합니다.
-var xhr = new XMLHttpRequest();
-
-// 요청을 보낼 URL을 설정합니다.
-var url = 'data.php?offset=0&limit=2'; // offset과 limit 파라미터 추가
-xhr.open('GET', url);
-
-// 응답을 받을 때마다 처리할 콜백 함수를 지정합니다.
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-        if (xhr.status === 200) {
-            // 응답을 처리합니다.
-            var response = xhr.responseText;
-            console.log(response);
-        } else {
-            // 에러 처리를 합니다.
-            console.error(xhr.statusText);
-        }
-    }
-};
-
-// 요청을 보냅니다.
-xhr.send(); */
+    }); */
