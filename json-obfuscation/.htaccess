@@ -1,0 +1,3 @@
+# RewriteEngine on
+# RewriteCond %{REQUEST_METHOD} !^POST$
+# RewriteRule ^data.php$ - [NC,R=404,L]
