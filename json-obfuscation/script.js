@@ -1,7 +1,7 @@
 
 
 //============= 방법1
-let combinedObject = {}
+const numberOfArraysToSeparateFromJSON = 2;
 
 makeMultipleRequests();
 
@@ -14,15 +14,13 @@ function makeMultipleRequests() {
         .then(response => {
             console.log('response', response);
             const requests = [];
-            for (let i = 0; i < response; i += 2) {
-                requests.push(makeRequest(`data.php?offset=${i}&limit=2`));
+            for (let i = 0; i < response; i += numberOfArraysToSeparateFromJSON) {
+                requests.push(makeRequest(`data.php?offset=${i}&limit=${numberOfArraysToSeparateFromJSON}`));
             }
             return Promise.all(requests);
         }).then(responses => {
-            combinedObject = Object.assign({}, ...responses);
-            return responses;
-        }).then(response => {
-            console.log('response', response, 'typeof response', typeof response);
+            let combinedObject = responses.flat();
+            console.log('combinedObject', combinedObject);
         })
 }
 
