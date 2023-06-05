@@ -1,7 +1,7 @@
 const flatBtn = document.querySelector('.flat-btn');
 const curvBtn = document.querySelector('.curv-btn');
-const flatAnime = document.querySelector('animate.flat');
-const curvAnime = document.querySelector('animate.curv');
+const flatAnime = document.querySelectorAll('animate.flat');
+const curvAnime = document.querySelectorAll('animate.curv');
 const svg = document.querySelector('.svg');
 let isActive = false;
 
@@ -10,7 +10,9 @@ flatBtn.addEventListener("pointerdown", function () {
     if (isActive === false) {
         isActive = true
         svg.dataset.mode = flatBtn.dataset.mode;
-        curvAnime.beginElement();
+        curvAnime.forEach(element => {
+            element.beginElement();
+        });
         setTimeout(() => {
             isActive = false;
         }, 500);
@@ -22,7 +24,9 @@ curvBtn.addEventListener("pointerdown", function () {
     if (isActive === false) {
         isActive = true
         svg.dataset.mode = curvBtn.dataset.mode;
-        flatAnime.beginElement();
+        flatAnime.forEach(element => {
+            element.beginElement();
+        });
         setTimeout(() => {
             isActive = false;
         }, 500);
