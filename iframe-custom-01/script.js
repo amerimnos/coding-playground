@@ -7,12 +7,29 @@ iframe.onload = function () {
     var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
     // 복제할 요소 선택
-    var originalElement = iframeDoc.querySelector('html');
+    var originalElements = iframeDoc.querySelectorAll('#index_list .slick-slide:not(.slick-cloned)');
 
     // 요소 복제
-    var clonedElement = originalElement.cloneNode(true);
+    var clonedElements = Array.from(originalElements).map(function (originalElement) {
+        return originalElement.cloneNode(true);
+    });
 
     // 복제한 요소를 원하는 곳에 추가
     var targetElement = document.getElementById('targetElement');
-    targetElement.appendChild(clonedElement);
+    clonedElements.forEach(function (clonedElement) {
+        targetElement.appendChild(clonedElement);
+    });
 };
+
+
+//prependStringToImageSrc('https://ir.gsifn.io/kbfng/v4/main/');
+/* function prependStringToImageSrc(prependString) {
+    const images = document.getElementsByTagName('img');
+
+    for (let i = 0; i < images.length; i++) {
+        let src = images[i].getAttribute('src');
+        src = prependString + src;
+        images[i].setAttribute('src', src);
+    }
+} */
+

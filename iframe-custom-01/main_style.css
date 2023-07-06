@@ -1,22 +1,4 @@
 @charset "utf-8";
-@font-face{
-	font-family:"KBFGTextL";
-	src:url("https://www.kbfg.com/templets/kbfg/web/kor/font/KBFGTextL.eot");
-    src:local('※'), url('https://www.kbfg.com/templets/kbfg/web/kor/font/KBFGTextL.eot?#iefix') format("embedded-opentype"), url("https://www.kbfg.com/templets/kbfg/web/kor/font/KBFGTextL.woff") format("woff");
-	/*
-	src: url("../../font/KBFGTextL.eot?#iefix") format('embedded-opentype'),
-		url("../../font/KBFGTextL.woff") format('woff');
-	/*	url("../../font/KBFGTextL.ttf") format('truetype');*/
-}
-@font-face{
-	font-family:"KBFGTextM";
-	src:url("https://www.kbfg.com/templets/kbfg/web/kor/font/KBFGTextM.eot");
-    src:local('※'), url('https://www.kbfg.com/templets/kbfg/web/kor/font/KBFGTextM.eot?#iefix') format("embedded-opentype"), url("https://www.kbfg.com/templets/kbfg/web/kor/font/KBFGTextM.woff") format("woff");
-	/*
-	src: url("../../font/KBFGTextM.eot?#iefix") format('embedded-opentype'),
-		url("../../font/KBFGTextM.woff") format('woff');
-	/*	url("../../font/KBFGTextM.ttf") format('truetype');*/
-}
 
 html, body, div, span, p, button, img, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6 {
 	margin:0;
@@ -45,10 +27,9 @@ ul, dl {list-style:none;}
 	color:#FFF;
 	overflow:hidden;
 	background:transparent;
-	background:#000＼0＼IE8; /* test */
 
 	padding:60px 50px 25px 50px; 
-	background: url("../images/kb_bg.jpg");
+	background: url("https://ir.gsifn.io/kbfng/v4/main/images/kb_bg.jpg");
 	background-size:100%;
 	/*
 	border-top-right-radius:20px 20px; 

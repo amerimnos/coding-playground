@@ -93,7 +93,7 @@
     display:block;
     width:18px;
     height:20px;
-    background:url('../images/btn_prev.png');
+    background:url('https://ir.gsifn.io/kbfng/v4/main/images/btn_prev.png');
     background-size:cover;
 }
 [dir='rtl'] .slick-prev:before
@@ -117,7 +117,7 @@
     display:block;
     width:18px;
     height:20px;
-    background:url('../images/btn_next.png');
+    background:url('https://ir.gsifn.io/kbfng/v4/main/images/btn_next.png');
     background-size:cover;
 }
 [dir='rtl'] .slick-next:before

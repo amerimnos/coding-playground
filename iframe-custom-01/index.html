@@ -7,15 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>title</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #myIframe {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        #targetElement {
+            height: 438px;
+            width: 438px;
+        }
+        #targetElement * {
+            color: #000 !important;
+        }
+
+    </style>
 </head>
 
 <body>
     <div id="document">
         <iframe id="myIframe" src="./index02.html" frameborder="0" scrolling="no"></iframe>
+        <div id="targetElement"></div>
     </div>
-
-    <div id="targetElement"></div>
     <script src="script.js"></script>
 </body>
-
 </html>
