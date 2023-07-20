@@ -1,4 +1,4 @@
-// es5 버전으로, 원하는 인터벌을 제어할 수 있음.
+// es5 버전으로 원하는 인터벌을 제어할 수 있음.
 
 var videoIntervalArr = [];
 
@@ -8,7 +8,7 @@ for (var index = 0; index < elements.length; index++) {
         var intervalId = setInterval(function () {
             console.log('The s were downloaded ' + currentIndex + ' in ios Safari.');
             setTimeout(function () {
-                clearCustomInterval(1);
+                clearCustomInterval(currentIndex);
             }, 2000);
         }, 1000);
         videoIntervalArr[currentIndex] = intervalId;
