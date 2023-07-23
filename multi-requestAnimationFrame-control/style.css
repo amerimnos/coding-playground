@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+#some-element-you-want-to-animate {
+    width: 200px;
+    height: 200px;
+    background: #000;
+}
