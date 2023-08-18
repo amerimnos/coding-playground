@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+#document {
+    height: 500px;
+}
+iframe {
+    width: 1px;
+    min-width: 100%;
+    display: block;
+}
