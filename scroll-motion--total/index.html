@@ -5,13 +5,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>variable css, css sticky, scroll ratio를 활용한 애플 사이트 모션 샘플링</title>
+    <title>스크롤 모션 종합</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div id="document">
-        <section class="section01"></section>
+        <section class="section--empty">
+            <h2>scroll down~~!!~!</h2>
+        </section>
+        <section class="section01">
+            <div class="canvas-wrap">
+                <canvas width="1158" height="770"></canvas>
+            </div>
+        </section>
         <section class="section02">
             <article class="sticky-wrap">
                 <div class="sticky-inner">
@@ -30,7 +37,6 @@
                 </div>
             </article>
         </section>
-        <section class="section03"></section>
     </div>
     <script src="script.js"></script>
 </body>
