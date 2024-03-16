@@ -44,21 +44,19 @@ function controlImageUsingCanvasWhenScroll() {
         }
     }
     function handleScroll() {
-        console.table('ss')
-        const scrollFraction = window.scrollY / (scrollHeight - window.innerHeight);
-        const index = Math.min(
-            numFrames - 1,
-            Math.ceil(scrollFraction * numFrames)
-        );
-
-        if (index <= 0 || index > numFrames) {
+        if (frameIndex >= numFrames - 1) {
             return;
         }
-        frameIndex = index;
 
         if (!document.querySelector('canvas') || images.length < 1) {
             return;
         }
+
+        const scrollFraction = window.scrollY / (scrollHeight - window.innerHeight);
+        frameIndex = Math.min(
+            numFrames - 1,
+            Math.ceil(scrollFraction * numFrames)
+        );
         context.drawImage(images[frameIndex], 0, 0);
     }
 
