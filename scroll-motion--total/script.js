@@ -1,3 +1,10 @@
+/**
+ * 모션 구현시 체크 리스트
+ * 1. css variable은 지양해야 될듯하다.. 연속된 요소의 모션이 있을 경우 
+ * css timing function 사용하면 끝날 때를 기다릴 수 없기 때문에 문제가 복잡해짐. 
+ * 아싸리, js에서 처리를 지향.
+ */
+
 const YGT = {};
 
 YGT.controlImageUsingCanvasWhenScroll = function controlImageUsingCanvasWhenScroll() {
@@ -59,7 +66,6 @@ YGT.controlImageUsingCanvasWhenScroll = function controlImageUsingCanvasWhenScro
         }
 
         const scrollFraction = Math.abs(rect.top) / (rect.height - window.innerHeight);
-        console.log('frameIndex : ' + frameIndex);
         frameIndex = Math.min(
             numFrames - 1,
             Math.ceil(scrollFraction * numFrames)
@@ -118,6 +124,76 @@ YGT.scrollRatio = function scrollRatio(parentElem, TotalNumDividingSection) {
     }
 }
 
+YGT.setParallaxScrollMotion = function setParallaxScrollMotion() {
+    let defParallaxTranslateAmount = 300,
+        elements = document.querySelectorAll(".intersectionElem"),
+        isTriggerParallaxScroll = true;
+
+    if (elements.length === 0) return;
+
+    let observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            var target = entry.target,
+                isIntersecting = entry.isIntersecting;
+
+            target.classList.toggle("active", isIntersecting);
+        });
+
+        var activeParallaxElements = document.querySelectorAll('.intersectionElem.active');
+        if (activeParallaxElements.length === 0) {
+            window.removeEventListener('scroll', parallaxScrollListener);
+        } else if (!window.parallaxScrollListener) {
+            window.addEventListener('scroll', parallaxScrollListener);
+        }
+    }, { threshold: 0 });
+
+
+    elements.forEach(function (element) {
+        observer.observe(element);
+    });
+
+
+    /* function parallaxScrollListenerWrapper() {
+        if(isTriggerParallaxScroll === false) return;
+        isTriggerParallaxScroll = false;
+
+        setTimeout(() => {
+            parallaxScrollListener();
+        }, 0);
+    }; */
+    parallaxScrollListener();
+
+
+    function parallaxScrollListener() {
+        requestAnimationFrame(function () {
+            elements.forEach(function (element) {
+                let height = element.offsetHeight,
+                    top = element.getBoundingClientRect().top,
+                    center = top + height / 2,
+                    screenCenter = window.innerHeight / 2,
+                    ratio = Math.max(-1, Math.min(1, ((center - screenCenter) / (screenCenter + height / 2)))),
+                    moveVariable = 0;
+
+                //const easedRatio = easeCubicBezier(ratio);
+                
+                if (!element.classList.contains('active')) {
+                    moveVariable = center < screenCenter ? -defParallaxTranslateAmount : defParallaxTranslateAmount;
+                } else {
+                    moveVariable = ratio * defParallaxTranslateAmount;
+                }
+                element.style.transform = `translate3d(0, ${moveVariable}px, 0) rotate(${moveVariable}deg)`;
+            });
+            isTriggerParallaxScroll = true;
+        });
+    }
+
+    function easeCubicBezier(t) {
+        return 3 * t * t - 2 * t * t * t;
+    }
+    console.log('this : ' + this);
+}
+
+YGT.setParallaxScrollMotion();
 YGT.handleSectionScrollRatio();
 YGT.controlImageUsingCanvasWhenScroll();
 
