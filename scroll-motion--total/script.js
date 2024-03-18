@@ -127,7 +127,10 @@ YGT.scrollRatio = function scrollRatio(parentElem, TotalNumDividingSection) {
 YGT.setParallaxScrollMotion = function setParallaxScrollMotion() {
     let defParallaxTranslateAmount = 300,
         elements = document.querySelectorAll(".intersectionElem"),
-        isTriggerParallaxScroll = true;
+        isTriggerParallaxScroll = true,
+        start = 0,
+        moveVariable = 0,
+        done = false;
 
     if (elements.length === 0) return;
 
@@ -141,9 +144,9 @@ YGT.setParallaxScrollMotion = function setParallaxScrollMotion() {
 
         var activeParallaxElements = document.querySelectorAll('.intersectionElem.active');
         if (activeParallaxElements.length === 0) {
-            window.removeEventListener('scroll', parallaxScrollListener);
-        } else if (!window.parallaxScrollListener) {
-            window.addEventListener('scroll', parallaxScrollListener);
+            window.removeEventListener('scroll', parallaxScrollListenerWrapper);
+        } else if (!window.parallaxScrollListenerWrapper) {
+            window.addEventListener('scroll', parallaxScrollListenerWrapper);
         }
     }, { threshold: 0 });
 
@@ -152,45 +155,71 @@ YGT.setParallaxScrollMotion = function setParallaxScrollMotion() {
         observer.observe(element);
     });
 
+    window.requestAnimationFrame(parallaxScrollListener);
 
-    /* function parallaxScrollListenerWrapper() {
+    function parallaxScrollListenerWrapper() {
         if(isTriggerParallaxScroll === false) return;
         isTriggerParallaxScroll = false;
 
+        elements.forEach(function (element, index) {
+            getTransY(element, index);
+        })
+
         setTimeout(() => {
-            parallaxScrollListener();
-        }, 0);
-    }; */
-    parallaxScrollListener();
+            window.requestAnimationFrame(parallaxScrollListener);
+        }, 50);
+    };
 
+    function parallaxScrollListener(timestamp) {
+        if (start === undefined) {
+            start = timestamp;
+        }
+        const elapsed = timestamp - start;
 
-    function parallaxScrollListener() {
-        requestAnimationFrame(function () {
-            elements.forEach(function (element) {
-                let height = element.offsetHeight,
-                    top = element.getBoundingClientRect().top,
-                    center = top + height / 2,
-                    screenCenter = window.innerHeight / 2,
-                    ratio = Math.max(-1, Math.min(1, ((center - screenCenter) / (screenCenter + height / 2)))),
-                    moveVariable = 0;
+        elements.forEach(function (element, index) {
+            let height = element.offsetHeight,
+                top = element.getBoundingClientRect().top,
+                center = top + height / 2,
+                screenCenter = window.innerHeight / 2,
+                ratio = Math.max(-1, Math.min(1, ((center - screenCenter) / (screenCenter + height / 2))));
 
-                //const easedRatio = easeCubicBezier(ratio);
-                
-                if (!element.classList.contains('active')) {
-                    moveVariable = center < screenCenter ? -defParallaxTranslateAmount : defParallaxTranslateAmount;
-                } else {
-                    moveVariable = ratio * defParallaxTranslateAmount;
-                }
-                element.style.transform = `translate3d(0, ${moveVariable}px, 0) rotate(${moveVariable}deg)`;
-            });
-            isTriggerParallaxScroll = true;
+            //const easedRatio = easeCubicBezier(ratio);
+            
+            if (!element.classList.contains('active')) {
+                moveVariable = center < screenCenter ? -defParallaxTranslateAmount : defParallaxTranslateAmount;
+            } else {
+                moveVariable = ratio * defParallaxTranslateAmount;
+            }
+            element.style.transform = `translate3d(0, ${YGT[`transformedTranslateY${index}`] + elapsed}px, 0) rotate(${YGT[`transformedTranslateY${index}`] + elapsed}deg)`; // TODO : 큐빅 베지어 적용하여 부드럽게 적용 여부 확인 필요.
         });
+
+        if(elapsed >= moveVariable) {
+            isTriggerParallaxScroll = true;
+            start = undefined;
+        }
+        if(elapsed < moveVariable) {
+            window.requestAnimationFrame(parallaxScrollListener);
+        }
     }
 
     function easeCubicBezier(t) {
         return 3 * t * t - 2 * t * t * t;
     }
-    console.log('this : ' + this);
+
+    function getTransY(element, index) {
+        const computedStyle = window.getComputedStyle(element);
+        const translateY = computedStyle.getPropertyValue('transform') || '0';
+        const objectKey = `transformedTranslateY${index}`;
+
+        if (translateY !== '0') {
+            const matrix = new WebKitCSSMatrix(translateY);
+            const transformedTranslateY = matrix.m42;
+            return YGT[objectKey] = transformedTranslateY;
+        } else {
+            console.log('현재 translateY 값: 0');
+            return YGT[objectKey] = 0;
+        }
+    }
 }
 
 YGT.setParallaxScrollMotion();

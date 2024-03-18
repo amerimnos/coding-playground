@@ -51,7 +51,6 @@ body {
     transform: scale(clamp(.5, var(--user-section02-divided-area1-scroll-ratio--reverse), 1));
     transform-style: preserve-3d;
     perspective: 800px;
-    transition: transform cubic-bezier(0, 0.74, 0.22, 1) 1.3s;
 }
 
 .section02 .sticky-wrap img {
@@ -73,23 +72,19 @@ body {
     position: relative;
     z-index: 10;
     opacity: var(--user-section02-divided-area1-scroll-ratio--reverse);
-    transition: opacity cubic-bezier(0, 0.74, 0.22, 1) 1.3s;
 }
 
 .section02 .sticky-elem-02 {
     transform-origin: center;
     transform: rotateY(calc(var(--user-section02-divided-area4-scroll-ratio) * 120deg)) translate3d(calc(var(--user-section02-divided-area4-scroll-ratio) * 1200px), calc(var(--user-section02-divided-area4-scroll-ratio) * 700px), calc(var(--user-section02-divided-area4-scroll-ratio) * 1320px)) scale(var(--user-section02-divided-area4-scroll-ratio--reverse));
-    transition: transform cubic-bezier(0, 0.74, 0.22, 1) 1.3s;
 }
 
 .section02 .sticky-elem-03 {
     height: calc(var(--user-section02-divided-area3-scroll-ratio--reverse) * 100%);
-    transition: height cubic-bezier(0, 0.74, 0.22, 1) 1.3s;
 }
 
 .section02 .sticky-elem-04 {
     height: calc(var(--user-section02-divided-area2-scroll-ratio--reverse) * 100%);
-    transition: height cubic-bezier(0, 0.74, 0.22, 1) 1.3s;
 }
 .section03 {
     height: 210vh;
@@ -102,7 +97,6 @@ body {
     height: 300px;
     background-color: #ddd;
     border: dotted 1px red;
-    transition: transform cubic-bezier(0, 0.74, 0.22, 1) 1.3s;
 }
 .section03 .intersectionElem--01 {
     top: 30vh;
@@ -126,6 +120,7 @@ body {
     top: 0;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
 }
 .section04 .sticky-elem {
     color: #fff;
