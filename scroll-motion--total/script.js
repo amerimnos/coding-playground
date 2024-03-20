@@ -222,8 +222,53 @@ YGT.setParallaxScrollMotion = function setParallaxScrollMotion() {
     }
 }
 
+YGT.setCubicBazierMotion = function setCubicBazierMotion() {
+    const box = document.querySelector('.box');
+    let startTime, duration = 500; // 애니메이션 지속시간 2초
+
+    // ease-in-out 타이밍 함수
+    function easeInOut(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    }
+
+    function animate(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const easedProgress = easeInOut(progress);
+      const targetX = 100;
+      box.style.transform = `translateX(${easedProgress * targetX}px)`;
+
+      if (elapsedTime < duration) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    function getTransX(element, index) {
+        const computedStyle = window.getComputedStyle(element);
+        const translateX = computedStyle.getPropertyValue('transform') || '0';
+        const objectKey = `transformedTranslateX${index}`;
+
+        if (translateX !== '0') {
+            const matrix = new WebKitCSSMatrix(translateX);
+            const transformedTranslateX = matrix.m42;
+            return YGT[objectKey] = transformedTranslateX;
+        } else {
+            console.log('현재 translateX 값: 0');
+            return YGT[objectKey] = 0;
+        }
+    }
+
+    window.addEventListener('scroll', function() {
+      startTime = null; // 애니메이션 재시작을 위해 startTime 초기화
+      requestAnimationFrame(animate);
+    });
+}
+
+
 YGT.setParallaxScrollMotion();
 YGT.handleSectionScrollRatio();
 YGT.controlImageUsingCanvasWhenScroll();
+YGT.setCubicBazierMotion();
 
 window.addEventListener("scroll", YGT.handleSectionScrollRatio);

@@ -32,6 +32,7 @@ body {
     height: 100vh;
     border: dotted 1px red;
 }
+
 .section01 canvas {
     width: 100%;
 }
@@ -86,11 +87,13 @@ body {
 .section02 .sticky-elem-04 {
     height: calc(var(--user-section02-divided-area2-scroll-ratio--reverse) * 100%);
 }
+
 .section03 {
     height: 210vh;
     width: 100%;
-    overflow-x:hidden;
+    overflow-x: hidden;
 }
+
 .section03 .intersectionElem {
     position: relative;
     width: 200px;
@@ -98,22 +101,27 @@ body {
     background-color: #ddd;
     border: dotted 1px red;
 }
+
 .section03 .intersectionElem--01 {
     top: 30vh;
     left: 20%;
 }
+
 .section03 .intersectionElem--02 {
     top: 40vh;
     left: 60%;
 }
+
 .section03 .intersectionElem--03 {
     top: 50vh;
     left: 80%;
 }
+
 .section04 {
     height: 300vh;
     background-color: skyblue;
 }
+
 .section04 .sticky-wrap {
     display: flex;
     position: sticky;
@@ -122,8 +130,12 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-.section04 .sticky-elem {
-    color: #fff;
-    font-size: 100px;
-    white-space: nowrap;
+
+.section04 .box {
+    position: relative;
+    top: 50%;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
 }
